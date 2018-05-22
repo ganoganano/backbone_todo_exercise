@@ -28,4 +28,6 @@ let taskView = new TaskView({model: task})
 
 console.log(taskView.render().el);
 
+$('body').append(taskView.render().el)
+
 })();
