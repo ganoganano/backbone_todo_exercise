@@ -13,5 +13,7 @@ let Task = Backbone.Model.extend({
 
 let task = new Task();
 
+task.set('title', 'changed title')
+console.log(task.get('title'));
 
 })();
