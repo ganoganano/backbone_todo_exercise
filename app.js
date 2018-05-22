@@ -8,25 +8,18 @@ let Task = Backbone.Model.extend({
     defaults: {
         title : "title",
         completed: false
-    },
-    validate: function(attr) {
-        if(_.isEmpty(attr.title)) {
-            return "title must not be empty."
-        }
-    },
-    toggle: function() {
-        this.set('completed', !this.get('completed'))
     }
 });
 
-let task1 = new Task();
+let task = new Task();
 
-console.log(task1.toJSON());
-task1.toggle();
-console.log(task1.toJSON());
+// View
 
-task1.set({title: ''}, {validate: true})
+let TaskView = Backbone.View.extend({
+    tagName: 'li',
+})
+let taskView = new TaskView({ model: task})
 
-console.log(task1.toJSON());
+console.log(taskView.el);
 
 })();
