@@ -25,6 +25,17 @@ let TaskView = Backbone.View.extend({
     }
 })
 
+let TasksView = Backbone.View.extend({
+    tagName: 'ui',
+    render: function() {
+        this.collection.each((task)=>{
+            let taskView = new TaskView({model: task})
+            this.$el.append(taskView.render().el)
+        })
+        return this
+    }
+})
+
 // Collection
 
 let Tasks = Backbone.Collection.extend({
@@ -42,7 +53,8 @@ let tasks = new Tasks([
         title: 'task3'
     }
 ])
-console.log(tasks.toJSON());
 
+let tasksView = new TasksView({collection: tasks})
+$('#tasks').html(tasksView.render().el)
 
 })();
