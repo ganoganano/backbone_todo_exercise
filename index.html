@@ -12,8 +12,9 @@
     <div id="tasks"></div>
 
     <script type='text/template' id="task-template">
+        <input type="checkbox" class="toggle" <%- completed?'checked':'' %>>
         <%- title %>
-        <span class='delete'>[x]</span>
+        <span class='delete' >[x]</span>
     </script>
     <script src="backbone/test/vendor/jquery.js"></script>
     <script src="backbone/test/vendor/underscore.js"></script>

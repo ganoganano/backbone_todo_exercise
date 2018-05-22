@@ -12,14 +12,19 @@
         tagName: 'li',
         initialize: function(){
             this.model.on('destroy', this.remove, this)
+            this.model.on('change', this.render, this)
         },
         events: {
-            "click .delete": "destroy"
+            "click .delete": "destroy",
+            "click .toggle": 'toggel'
         },
         destroy: function(){
             if(confirm('are you sure?')){
                 this.model.destroy()
             }
+        },
+        toggle: function(){
+            this.model.set('completed', !this.mode.get('completed') )
         },
         remove: function(){
             this.$el.remove();
@@ -45,7 +50,7 @@
     let tasks = new Tasks([
         {
             title: 'task1',
-            complted: true
+            completed: true
         },
         {
             title: 'task2'
