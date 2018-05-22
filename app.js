@@ -17,14 +17,14 @@ let task = new Task();
 
 let TaskView = Backbone.View.extend({
     tagName: 'li',
-    template: _.template("<%- title %>"),
+    template: _.template( $('#task-template').html() ),
     render: function() {
         let template = this.template( this.model.toJSON() )
         this.$el.html(template)
         return this
     }
 })
-let taskView = new TaskView({ model: task})
+let taskView = new TaskView({model: task})
 
 console.log(taskView.render().el);
 
