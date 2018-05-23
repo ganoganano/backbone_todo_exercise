@@ -36,8 +36,16 @@
             return this
         }
     })
+
     let TasksView = Backbone.View.extend({
         tagName: 'ul',
+        initialize: function() {
+            this.collection.on('add', this.addNew, this)
+        },
+        addNew: function(task) {
+            let taskView = new TaskView({model: task})
+            this.$el.append(taskView.render().el)
+        },
         render: function(){
             this.collection.each((task)=>{
             let taskView = new TaskView({model: task})
@@ -47,7 +55,7 @@
         }
     })
 
-    let addTaskView = Backbone.View.extend({
+    let AddTaskView = Backbone.View.extend({
         el: "#addTask",
         events: {
             'submit': 'submit'
@@ -75,5 +83,6 @@
     ])
 
     let tasksView = new TasksView({collection: tasks})
+    let addTaskView = new AddTaskView({collection: tasks})
     $('#tasks').html(tasksView.render().el)
 })();
