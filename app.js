@@ -26,7 +26,7 @@
         },
         events: {
             "click .delete": "destroy",
-            "click .toggle": 'toggel'
+            "click .toggle": 'toggle'
         },
         destroy: function(){
             if(confirm('are you sure?')){
@@ -34,7 +34,7 @@
             }
         },
         toggle: function(){
-            this.model.set('completed', !this.mode.get('completed') )
+            this.model.set('completed', !this.model.get('completed') )
         },
         remove: function(){
             this.$el.remove();
@@ -51,10 +51,13 @@
         tagName: 'ul',
         initialize: function() {
             this.collection.on('add', this.addNew, this)
+            this.collection.on('change', this.updateCount, this)
+            this.collection.on('destroy', this.updateCount, this)
         },
         addNew: function(task) {
             let taskView = new TaskView({model: task})
             this.$el.append(taskView.render().el)
+            this.updateCount()
         },
         updateCount: function() {
             let uncompleted = this.collection.filter((task)=>{
