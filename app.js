@@ -47,6 +47,20 @@
         }
     })
 
+    let addTaskView = Backbone.View.extend({
+        el: "#addTask",
+        events: {
+            'submit': 'submit'
+        },
+        submit: function(e){
+            e.preventDefault()
+            let task = new Task({
+                title: $('#title').val()
+            })
+            this.collection.add(task)
+        }
+    })
+
     let tasks = new Tasks([
         {
             title: 'task1',
