@@ -12,7 +12,7 @@
         },
         initialize: function() {
             this.on('invalid', (model, error) => {
-                $('error').html(error)
+                $('#error').html(error)
             })
         }
     })
@@ -76,7 +76,7 @@
             if(task.set({title: $('#title').val()}, {validate: true})){
                 this.collection.add(task)
             }else{
-
+                
             }
         }
     })
