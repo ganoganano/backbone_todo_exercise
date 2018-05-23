@@ -57,6 +57,7 @@
         addNew: function(task) {
             let taskView = new TaskView({model: task})
             this.$el.append(taskView.render().el)
+            $('#title').val('').focus()
             this.updateCount()
         },
         updateCount: function() {
@@ -85,8 +86,7 @@
             let task = new Task()
             if(task.set({title: $('#title').val()}, {validate: true})){
                 this.collection.add(task)
-            }else{
-                
+                $('#error').empty()
             }
         }
     })
