@@ -56,11 +56,18 @@
             let taskView = new TaskView({model: task})
             this.$el.append(taskView.render().el)
         },
+        updateCount: function() {
+            let uncompleted = this.collection.filter((task)=>{
+                return !task.get('completed')
+            })
+            $('#count').html(uncompleted.length)
+        },
         render: function(){
             this.collection.each((task)=>{
             let taskView = new TaskView({model: task})
             this.$el.append(taskView.render().el)
             })
+            this.updateCount()
             return this
         }
     })
