@@ -4,6 +4,16 @@
         defaults:{
             title: 'something',
             completed: false
+        },
+        validate: function(attrs) {
+            if (_.isEmpty(attrs.title))  {
+                return 'title must not be empty'
+            }
+        },
+        initialize: function() {
+            this.on('invalid', (model, error) => {
+                $('error').html(error)
+            })
         }
     })
     let Tasks = Backbone.Collection.extend({model: Task})
@@ -62,10 +72,12 @@
         },
         submit: function(e){
             e.preventDefault()
-            let task = new Task({
-                title: $('#title').val()
-            })
-            this.collection.add(task)
+            let task = new Task()
+            if(task.set({title: $('#title').val()}, {validate: true})){
+                this.collection.add(task)
+            }else{
+
+            }
         }
     })
 
